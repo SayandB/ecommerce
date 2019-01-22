@@ -1,5 +1,6 @@
 <template>
   <div>
+    <search-bar></search-bar>
   <v-container>
     <v-layout row class="text-md-center" color="#29B6F6">
 
@@ -34,8 +35,12 @@
 
 <script>
   import {mapGetters,mapActions} from 'vuex'
+  import SearchBar from '@/components/SearchBar'
   export default {
   name: 'SingUpPage',
+  components : {
+    SearchBar
+  }
   data () {
     return {
       name : '',

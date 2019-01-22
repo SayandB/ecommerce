@@ -1,5 +1,6 @@
 <template>
-<div>
+<div id="home">
+  <search-bar></search-bar>
   <v-layout v-for="product in products" v-bind:key='product'>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
@@ -26,7 +27,7 @@
           <v-layout row justify-center>
             <v-dialog v-model="dialog" persistent max-width="290">
               <v-btn slot="activator" color="primary" dark @click="addToCart(product)">Add To Cart</v-btn>
-              <v-btn slot="activator" color="primary" dark @click="productDetails(product)">Details</v-btn>
+              <v-btn slot="activator" color="primary" dark @click="productDetails(product)" href="/DetailsPage">Details</v-btn>
             </v-dialog>
           </v-layout>
         </v-card-actions>
@@ -39,13 +40,14 @@
 <script>
 import {APIService} from '../APIService';
 import {mapGetters,mapActions} from 'vuex'
-
+import SearchBar from '@/components/SearchBar'
 const API_URL = 'http://localhost:8000';
 const apiService = new APIService();
 
 export default {
 name: 'MainPage',
 components: {
+  SearchBar
 },
 data() {
 return {
@@ -54,19 +56,18 @@ products: []
 },
 
 methods: {
-getProducts(){
+  ...mapActions(['selectProduct']),
+  getProducts (){
     apiService.getProducts().then((data) => {
-
-        this.products = data.data;
+      this.products = data.data;
     });
-},
-...mapActions(['selectProduct']),
-productDetails(product) {
-  this.$store.dispatch('selectProduct', product);_
-}
+  },
+  productDetails (product) {
+    this.$store.dispatch('selectProduct', product);_
+  }
 },
 mounted() {
-this.getProducts();
+  this.getProducts();
 },
 }
 

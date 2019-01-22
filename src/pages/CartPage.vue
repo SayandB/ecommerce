@@ -1,6 +1,6 @@
 <template>
   <div>
-
+<search-bar></search-bar>
   <div>
   <v-layout>
     <v-flex xs12 sm6 offset-sm3>
@@ -74,8 +74,12 @@
 </template>
 
 <script>
+import SearchBar from '@/components/SearchBar'
 export default {
   name: 'CartPage',
+  components : {
+    SearchBar
+  }
   data () {
       return {
         alert: true

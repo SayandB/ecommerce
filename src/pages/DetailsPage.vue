@@ -1,6 +1,5 @@
 <template>
   <v-container grid-list-xl>
-    {{getSelectedProduct.name}}
     <v-layout v-bind="binding">
       <v-flex>
         <v-card>
@@ -28,14 +27,18 @@
 <script>
 import {mapGetters} from 'vuex'
   export default {
+    name: 'Details-Page',
     computed: {
-      ...mapGetters(['getSelectedProduct']),
+      ...mapGetters(['userdetails', 'getSelectedProduct']),
       binding () {
         const binding = {}
 
         if (this.$vuetify.breakpoint.mdAndUp) binding.column = true
 
         return binding
+      },
+      isProductDetails: function () {
+        return this.getSelectedProduct
       }
     }
   }

@@ -1,28 +1,31 @@
 import commonApi from '@/api'
 
 const state = {
-    loginDetails : null,
-    signupDetails : null,
-    product : []
+  login : false,
+  loginDetails : null,
+  signupDetails : null,
+  product : {}
 }
 const mutations = {
-    LOGIN_DETAILS : (state,value) => {
-        state.loginDetails = value
-    },
+  LOGIN_DETAILS : (state,value) => {
+    state.loginDetails = value
+    state.login = true
+  },
 
-    SIGNUP_DETAILS : (state,value) => {
-      state.signupDetails = value
-    },
+  SIGNUP_DETAILS : (state,value) => {
+    state.signupDetails = value
+    state.login = true
+  },
 
-    SELECT_PRODUCT : (state, product) => {
-      state.product = product
-    }
+  SELECT_PRODUCT : (state, product) => {
+    state.product = product
+  }
 }
 const actions = {
-  login ({commit},data) {
+  login ({commit}, data) {
     commonApi.postDataViaApi('/user/login',data,
       (response) => {
-          commit('LOGIN_DETAILS',response.body)
+          commit('LOGIN_DETAILS', response.body)
       },
       (error) => {
           console.log(error)
@@ -57,6 +60,7 @@ const getters = {
   },
 
   getSelectedProduct: (state) => {
+    debugger
     return state.product
   }
 }
