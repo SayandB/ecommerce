@@ -2,12 +2,8 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import router from './router'
-import Vuetify from 'vuetify'
 import App from './App'
 import store from './CommonStore'
-import 'vuetify/dist/vuetify.min.css'
-import 'material-design-icons-iconfont/dist/material-design-icons.css'
-Vue.use(Vuetify)
 
 Vue.config.productionTip = false
 

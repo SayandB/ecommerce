@@ -174,14 +174,7 @@ a{color:inherit;text-decoration:none}
   transition:all .2s ease-in-out 0s;
 }
 .login-form .group label .icon:before{
-  left:3px;
-  width:5px;
-  bottom:6px;
-  -webkit-transform:scale(0) rotate(0);
-          transform:scale(0) rotate(0);
-}
-.login-form .group label .icon:after{
-  top:6px;
+    top:6px;
   right:0;
   -webkit-transform:scale(0) rotate(0);
           transform:scale(0) rotate(0);
