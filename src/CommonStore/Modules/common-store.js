@@ -2,19 +2,18 @@ import commonApi from '@/api'
 
 const state = {
   login : false,
-  loginDetails : null,
-  signupDetails : null,
+  loginDetails : {},
   product : {}
 }
 const mutations = {
   LOGIN_DETAILS : (state,value) => {
     state.loginDetails = value
-    state.login = true
+    // state.login = true
   },
 
   SIGNUP_DETAILS : (state,value) => {
-    state.signupDetails = value
-    state.login = true
+    state.loginDetails = value
+    // state.login = true
   },
 
   SELECT_PRODUCT : (state, product) => {
@@ -22,22 +21,34 @@ const mutations = {
   }
 }
 const actions = {
-  login ({commit}, data) {
-    commonApi.postDataViaApi('/user/login',data,
+  login ({commit}, {data, success, failure}) {
+    commonApi.postDataViaApi('/user/login', data,
       (response) => {
+        if(response.body.status)  {
           commit('LOGIN_DETAILS', response.body)
+          success(response)
+        }else{
+          commit('LOGIN_DETAILS', [])
+          failure(response)
+        }
       },
       (error) => {
-          console.log(error)
-          commit('LOGIN_DETAILS',[])
+        failure(error)
+        commit('LOGIN_DETAILS',[])
       }
     )
   },
 
-  signup ({commit},data) {
+  signup ({commit}, {data, success, failure}) {
     commonApi.postDataViaApi('/user/signup',data,
       (response) => {
-          commit('SIGNUP_DETAILS',response.body)
+        if(response.body.status)  {
+        commit('SIGNUP_DETAILS',response.body)
+        success(response)
+      }else{
+        commit('LOGIN_DETAILS', [])
+        failure(response)
+      }
       },
       (error) => {
           console.log(error)
@@ -60,8 +71,10 @@ const getters = {
   },
 
   getSelectedProduct: (state) => {
-    debugger
     return state.product
+  },
+  getLogin: (state) => {
+    return state.login
   }
 }
 

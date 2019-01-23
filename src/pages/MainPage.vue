@@ -36,7 +36,7 @@
         <v-card-actions>
           <v-layout row justify-center>
             <v-dialog v-model="dialog" persistent max-width="290">
-              <v-btn slot="activator" color="primary" dark @click="addToCart(product)">Add To Cart</v-btn>
+              <v-btn slot="activator" color="primary" dark v-if="login" @click="addToCart(product)">Add To Cart</v-btn>
               <v-btn slot="activator" color="primary" dark @click="productDetails(product)" href="/DetailsPage">Details</v-btn>
             </v-dialog>
           </v-layout>
@@ -78,7 +78,7 @@ methods: {
 },
 mounted() {
   this.getProducts();
-},
+}
 }
 
 </script>
