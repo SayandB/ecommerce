@@ -66,14 +66,16 @@ export default {
       productName: ''
     }
   },
+  computed: {
+    ...mapGetters(['loginStatus']),
+    isLogin: function () {
+      return this.loginStatus
+    }
+  },
   methods: {
   ...mapActions(['showProduct']),
   getProducts (){
     this.$store.dispatch('showProduct', this.productName)
-    },
-    ...mapGetters(['loginStatus']),
-    isLogin: function () {
-      return this.loginStatus
     }
   },
 mounted() {
