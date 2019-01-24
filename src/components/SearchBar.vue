@@ -68,19 +68,18 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['logindetails']),
-    isActiveUser: function () {
+    ...mapGetters(['logindetails', 'loginStatus']),
+      isActiveUser: function () {
         return this.logindetails
-      }
+      },
+    isLogin: function () {
+      return this.loginStatus
+    }
   },
   methods: {
   ...mapActions(['showProduct']),
-  getProducts (){
-    this.$store.dispatch('showProduct', this.productName)
-    },
-    ...mapGetters(['loginStatus']),
-    isLogin: function () {
-      return this.loginStatus
+    getProducts (){
+      this.$store.dispatch('showProduct', this.productName)
     },
     showcart () {
   		this.$store.dispatch('showingCart',{
@@ -89,8 +88,8 @@ export default {
   		this.$router.push('/cartpage')
   	}
   },
-mounted() {
-  this.getProducts();
-}
+  mounted() {
+      this.getProducts();
+   }
 }
 </script>
