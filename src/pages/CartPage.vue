@@ -1,85 +1,109 @@
 <template>
-  <div>
-
-  <div>
-  <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
-      <v-card>
-        <v-img
-          class="white--text"
-          height="200px"
-          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-        >
-          <!-- <v-container fill-height fluid>
-            <v-layout fill-height>
-              <v-flex xs12 align-end flexbox>
-                <span class="headline">Top 10 Australian beaches</span>
-              </v-flex>
-            </v-layout>
-          </v-container> -->
-        </v-img>
-        <v-card-title>
-          <!-- description of the product -->
-          <div>
-            <span class="grey--text">Number 10</span><br>
-            <span>Whitehaven Beach</span><br>
-            <span>Whitsunday Island, Whitsunday Islands</span>
+  <div class="main">
+   <div class="page">
+     <div class="col s12 m7">
+       <h5>Shopping Cart</h5>
+       <div v-for="(carddetails, index) in displayCartDetails" v-bind:key = "index">
+      <div class="card horizontal">
+      <div class="card-image">
+        <img :src="carddetails.imageUrl">
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+          console.log(carddetails);
+          <p><strong>CART ID:{{carddetails.cartId}}</strong>></p>
+          <p><strong>TOKEN:{{carddetails.token}}</strong>></p>
+          <p><strong>PRODUCT ID:{{carddetails.productId}}</strong>></p>
+          <p><strong>MERCHANT ID:{{carddetails.merchantId}}</strong>></p>
+          <p><strong>QUANTITY:{{carddetails.quantity}}</strong>></p>
+          <p><strong>PRODUCT NAME:{{carddetails.productName}}</strong>></p>
+          <p><strong>MERCHANT NAME:{{carddetails.merchantName}}</strong>></p>
+          <p><strong>PRICE:{{carddetails.price}}</strong>></p>
+        </div>
+        <div class="card-action">
+          <!--  <button style="color:black;background-color:#f44336" type="submit" name="action" @click="removeproduct">Remove</button> -->
+          <a href="#" class = "cart red-text" @click="removeproduct">Remove</a>
+              </div>
+            </div>
           </div>
-        </v-card-title>
-
-        <!-- <v-card-actions>
-          <v-btn flat color="orange">Buy Now</v-btn> -->
-         
-     
-          <!-- <v-btn flat color="orange">Add to Cart</v-btn> -->
-           <!--  <v-layout row justify-center>
-    <v-dialog v-model="dialog" persistent max-width="290">
-      <v-btn slot="activator" color="primary" dark>Buy Now</v-btn>
-      <v-card>
-        <v-card-title class="headline">Payment Done</v-card-title>
-        <v-card-text>Thanks for your order. The product will deliver as soon as possible.</v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer> -->
-          <!-- <v-btn color="green darken-1" flat @click="dialog = false">OK</v-btn> -->
-          <!-- <v-btn color="green darken-1" flat @click="dialog = false">Agree</v-btn> -->
-       <!--  </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-layout> -->
-      
-    <div>
-    <div class="text-xs-center">
-      <v-btn
-        block color="secondary" dark
-        @click="alert = !alert"
-      >
-        Buy Now
-      </v-btn>
+        </div>
+      </div>
     </div>
-    <v-alert
-      :value="alert"
-      type="success"
-      transition="scale-transition"
-    >
-      Your Payment Done.
-    </v-alert>
+  <div class="buton">
+      <!-- <button style="color:white;background-color:black;size:70px"type="submit" name="action" @click="buying">BuyNow</button> -->
+      <a href="#" class = "cart red-text" @click="buying">BuyNow</a>
   </div>
-      </v-card>
-    </v-flex>
-  </v-layout>
-</div>
-  
-
 </div>
 </template>
 
 <script>
+import SearchBar from '@/components/SearchBar'
+import {mapGetters,mapActions} from 'vuex'
 export default {
   name: 'CartPage',
   data () {
-      return {
-        alert: true
+    return {
+      userId:'',
+      productId:''
+    }
+  },
+  methods: {
+   ...mapActions(['deleteProduct','buyProduct']),
+    removeproduct () {
+      this.$store.dispatch('deleteProduct',{
+        userId: this.isActiveUser.userId,
+        productId: this.isProductDetails.productId
+      })
+    },
+    buying () {
+      this.$store.dispatch('buyProduct',{
+        userId: this.isActiveUser.userId
+      })
+    }
+  },
+  components : {
+      SearchBar
+  },
+
+   computed: {
+      ...mapGetters(['userdetails', 'getSelectedProduct', 'getCartDetails']),
+      isProductDetails: function () {
+        debugger
+        return this.getSelectedProduct
+      },
+
+      isActiveUser: function () {
+        return this.userdetails
+      },
+
+      displayCartDetails : function () {
+        return this.getCartDetails
       }
     }
+  
 }
 </script>
+
+<style scoped>
+    img{
+      height: 300px;
+    }
+    .card-content{
+      margin-right: 50px;
+    }
+
+    .page{
+      margin-right: 10px;
+      padding-left:50px;
+      padding-right:50px;
+    }
+  
+    .buton{
+      margin-right: 10px;
+      padding-left:50px;
+      padding-right:50px;
+      text-align: center;
+      
+    }
+
+  </style>

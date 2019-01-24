@@ -1,73 +1,72 @@
 <template>
-<div>
-  <v-layout v-for="product in products" v-bind:key='product'>
-    <v-flex xs12 sm6 offset-sm3>
-      <v-card>
-        <img height="200px" src="https://cdn.cultofmac.com/wp-content/uploads/2017/10/33394950664_efda7bfdbc_o.d502a74a8e3b4b60aa6014b9f0a00e95-780x439.jpg">
-          <!-- <v-container fill-height fluid>
-            <v-layout fill-height>
-              <v-flex xs12 align-end flexbox>
-                <span class="headline">Top 10 Australian beaches</span>
-              </v-flex>
-            </v-layout>
-          </v-container> -->
-        </img>
-
-        <v-card-title>
-          <!-- description of the product -->
-          <div>
-            <span class="grey--text">Name: {{product.name}}</span><br>
-            <span>Price: {{product.price}}</span><br>
-            <span>Stock: {{product.stock}}</span>
+  <div class="main">
+    <search-bar></search-bar>
+    <ad-bar></ad-bar>
+    <div class="row">
+      <div class="col s12 m4" v-for="(product,index) in getProducts" v-bind:key="index">
+        <div class="card" @click="productDetails(product)">
+          <div class="card-image">
+            <img :src="product.imageUrl">
+            <a class="btn-floating halfway-fab waves-effect waves-light red">
+              <i class="material-icons">add</i>
+            </a>
           </div>
-        </v-card-title>
-
-        <v-card-actions>
-          <v-layout row justify-center>
-            <v-dialog v-model="dialog" persistent max-width="290">
-              <v-btn slot="activator" color="primary" dark @click="addToCart(product)">Add To Cart</v-btn>
-              <v-btn slot="activator" color="primary" dark @click="productDetails(product)">Details</v-btn>
-            </v-dialog>
-          </v-layout>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
-</div>
+          <div class="card-content">
+            <span class="card-title" style>{{product.name}}</span>
+            <span class="Price" style>&#x20b9;{{product.price}}</span>
+            <span class="Rating" style>{{product.productRating}}</span>
+            <!-- <p>I am a very simple card. I am good at containing small bits of information. I am convenient because  I require little markup to use effectively.</p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
+<style scoped>
+.main {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+.Rating {
+  padding-left: 100px;
+}
+.card {
+  margin-top: 30px;
+  padding: 10px;
+}
+.card-image img {
+  height: 350px;
+  max-height: 100%;
+  max-width: 100%;
+}
+</style>
 
 <script>
-import {APIService} from '../APIService';
-import {mapGetters,mapActions} from 'vuex'
-
-const API_URL = 'http://localhost:8000';
-const apiService = new APIService();
-
+import { mapActions, mapGetters } from "vuex";
+import SearchBar from "@/components/SearchBar";
+import AdBar from "@/components/AdBar";
 export default {
-name: 'MainPage',
-components: {
-},
-data() {
-return {
-products: []
+  name: "MainPage",
+  components: {
+    SearchBar,
+    AdBar
+  },
+  computed: {
+    ...mapGetters(["showProduct", "getLogin"]),
+    getProducts() {
+      return this.showProduct;
+    }
+  },
+  methods: {
+    ...mapActions(["selectProduct"]),
+    productDetails(product) {
+      console.log(product);
+      this.$store.dispatch("selectProduct", product);
+      this.$router.push('/detailspage');
+    },
+    cardDetails: function() {
+      this.$router.push("/detailspage");
+    }
+  }
 };
-},
-
-methods: {
-getProducts(){
-    apiService.getProducts().then((data) => {
-
-        this.products = data.data;
-    });
-},
-...mapActions(['selectProduct']),
-productDetails(product) {
-  this.$store.dispatch('selectProduct', product);_
-}
-},
-mounted() {
-this.getProducts();
-},
-}
-
 </script>
