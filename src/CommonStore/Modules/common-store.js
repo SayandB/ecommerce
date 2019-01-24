@@ -139,10 +139,21 @@ addingtocart ({commit},data) {
       console.log(error)
       commit('GET_ORDER_HISTORY', [])
     })
+  },
+  showingCart ({commit},{userId}){
+    commonApi.getDataViaApi(`/cart/showCart?token=${userId}`,
+      (response) => {
+        commit('CART_DETAILS',response.body)
+      },
+      (error) => {
+        console.log(error)
+        commit('CART_DETAILS',[])
+      }
+      )
   }
 }
 const getters = {
-  userdetails : (state) => {
+  logindetails : (state) => {
     return state.loginDetails
   },
 
