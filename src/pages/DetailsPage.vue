@@ -1,5 +1,5 @@
 <template>
-<main>
+<div class="main-page">
   <search-bar></search-bar>
   <h2 class="header">{{selectedProduct.name}}</h2>
     <div class="card horizontal">
@@ -22,7 +22,6 @@
       </div>
     </div>
   </div>
-</main>
 </template>
 <script>
 import {mapGetters,mapActions} from 'vuex'
