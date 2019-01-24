@@ -1,84 +1,90 @@
 <template>
-<div id="home">
-  <search-bar></search-bar>
-  <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo right">Logo</a>
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">JavaScript</a></li>
-      </ul>
-    </div>
-  </nav>
-  <v-layout v-for="product in products" v-bind:key='product'>
-    <v-flex xs12 sm6 offset-sm3>
-      <v-card>
-        <img height="200px" src="https://cdn.cultofmac.com/wp-content/uploads/2017/10/33394950664_efda7bfdbc_o.d502a74a8e3b4b60aa6014b9f0a00e95-780x439.jpg">
-          <!-- <v-container fill-height fluid>
-            <v-layout fill-height>
-              <v-flex xs12 align-end flexbox>
-                <span class="headline">Top 10 Australian beaches</span>
-              </v-flex>
-            </v-layout>
-          </v-container> -->
-        </img>
-
-        <v-card-title>
-          <!-- description of the product -->
-          <div>
-            <span class="grey--text">Name: {{product.name}}</span><br>
-            <span>Price: {{product.price}}</span><br>
-            <span>Stock: {{product.stock}}</span>
+  <div class = "main">
+   <search-bar></search-bar> 
+   <ad-bar></ad-bar>
+   <div class="row">
+    <!-- v-for="product in products" -->
+    <div class="col s12 m4" >
+      <div class="card" >
+        <div class="card-image">
+          <img src = "https://static.toiimg.com/photo/54946764/Apple-iPhone-7.jpg">
+          <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content" >
+          <span class="card-title" style = "">Title<!-- {{product.name}}--></span>
+          <span class="Price" style = "">Price<!-- {{product.price}}--></span>
+          <span class="Rating" style = "">Rating<!-- {{product.productRating}--></span>
+            <!-- <p>I am a very simple card. I am good at containing small bits of information. I am convenient because  I require little markup to use effectively.</p> -->
           </div>
-        </v-card-title>
+        </div>
+      </div>
+    </div>
+  </div>  
+  </template> 
 
-        <v-card-actions>
-          <v-layout row justify-center>
-            <v-dialog v-model="dialog" persistent max-width="290">
-              <v-btn slot="activator" color="primary" dark @click="addToCart(product)">Add To Cart</v-btn>
-              <v-btn slot="activator" color="primary" dark @click="productDetails(product)" href="/DetailsPage">Details</v-btn>
-            </v-dialog>
-          </v-layout>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
-</div>
-</template>
+<style scoped>
+
+
+.main{
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.Rating{
+  padding-left: 100px;
+}
+.card {
+  margin-top: 5px;
+  width: 300px;
+}
+.card-image img {
+  max-height: 80%;
+  max-width: 80%;
+}
+</style>
 
 <script>
 import {APIService} from '../APIService';
 import {mapGetters,mapActions} from 'vuex'
 import SearchBar from '@/components/SearchBar'
+import AdBar from '@/components/AdBar'
 const API_URL = 'http://localhost:8000';
 const apiService = new APIService();
 
 export default {
 name: 'MainPage',
 components: {
-  SearchBar
+  SearchBar,
+  AdBar
 },
-data() {
-return {
-products: []
-};
-},
-
-methods: {
-  ...mapActions(['selectProduct']),
-  getProducts (){
-    apiService.getProducts().then((data) => {
-      this.products = data.data;
-    });
-  },
-  productDetails (product) {
-    this.$store.dispatch('selectProduct', product);_
-  }
-},
-mounted() {
-  this.getProducts();
-},
+// data() {
+// return {              
+// productsId:''
+// }
+// },
+// computed: {
+//   //Spread Operator
+//   ...mapGetters(['getSelectedProduct'])
+// },
+// methods: {  
+//   ...mapActions(['selectProduct']),
+//   getProducts (){
+//     apiService.getProducts().then((data) => {
+//       this.products = data.data
+//     })
+//   },
+//   productDetails (product) {
+//     this.$store.dispatch('selectProduct', product);_
+//   },
+//   singleproduct () {
+//     this.$store.dispatch('allProducts',{
+//       productId:getProducts.productId
+//     })
+//   }
+// },
+// mounted() {
+//   this.getProducts();
+// },
 }
 
 </script>
