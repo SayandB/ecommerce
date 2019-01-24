@@ -91,16 +91,21 @@ import SearchBar from '@/components/SearchBar'
       }
     }
 </script>
-
 <style scoped>
 
 main {
   margin-left: 100px;
   margin-right: 100px;
 }
+.header{
+  margin-left: 100px;
+  margin-right: 100px;
+}
 .card {
   margin-top: 30px;
-  width: 500px;
+  margin-left: 100px;
+  margin-right: 100px;
+ 
 }
 .card-image img {
   height: 350px;

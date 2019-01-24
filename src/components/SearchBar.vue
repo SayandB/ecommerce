@@ -21,7 +21,7 @@
                     </li>
                     <li >
                         <router-link class="red-text" v-if= "isLogin" to="/OrderHistory">Hello </router-link>
-                        <a  class="red-text" v-else href="/Login">Login</a>
+                        <router-link  class="red-text" v-else to="/Login">Login</router-link>
                     </li>
                     <li>
                       <router-link class = "red-text" v-if ="isLogin" to="/MainPage">Logout</router-link>
