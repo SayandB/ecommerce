@@ -45,6 +45,10 @@ const mutations = {
   },
   GET_PRODUCT_DETAILS : (state,data) => {
     state.productDetails = data
+  },
+  LOGOUT : (state,data) => {
+    state.loginDetails = data
+    state.login = false
   }
 }
 const actions = {
@@ -166,6 +170,9 @@ addingtocart ({commit},data) {
       console.log(error)
       commit('GET_PRODUCTS',[])
   })
+  },
+  logout({commit}, data) {
+    commit('LOGOUT', data) 
   }
 }
 const getters = {

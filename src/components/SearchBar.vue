@@ -24,7 +24,7 @@
                         <router-link  class="red-text" v-else to="/Login">Login</router-link>
                     </li>
                     <li>
-                      <router-link class = "red-text" v-if ="isLogin" to="/MainPage">Logout</router-link>
+                      <button class = "red-text" v-if ="isLogin" @click="logOut">Logout</button>
                     </li>
                 </ul>
             </div>
@@ -86,7 +86,12 @@ export default {
   			token: isActiveUser.userId
   		})
   		this.$router.push('/cartpage')
-  	}
+    },
+    ...mapActions(['logout']),
+    logOut: function() {
+      this.$store.dispatch('logout',[])
+      this.$router.push('/mainpage')
+    }
   },
   mounted() {
       this.getProducts();
