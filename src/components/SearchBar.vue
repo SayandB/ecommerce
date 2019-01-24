@@ -17,7 +17,7 @@
                       <a href="/About" class="red-text">About</a>
                     </li>
                     <li>
-                      <router-link to="/CartPage" class="red-text"><i class="material-icons" id="cart">add_shopping_cart</i></router-link>
+                      <router-link to="/CartPage" class="red-text"><i @click="showcart" class="material-icons" id="cart">add_shopping_cart</i></router-link>
                     </li>
                     <li >
                         <router-link class="red-text" v-if= "isLogin" to="/OrderHistory">Hello </router-link>
@@ -63,8 +63,15 @@ export default {
   },
   data() {
     return {
-      productName: ''
+      productName: '',
+      token: ''
     }
+  },
+  computed: {
+    ...mapGetters(['logindetails']),
+    isActiveUser: function () {
+        return this.logindetails
+      }
   },
   methods: {
   ...mapActions(['showProduct']),
@@ -74,7 +81,13 @@ export default {
     ...mapGetters(['loginStatus']),
     isLogin: function () {
       return this.loginStatus
-    }
+    },
+    showcart () {
+  		this.$store.dispatch('showingCart',{
+  			token: isActiveUser.userId
+  		})
+  		this.$router.push('/cartpage')
+  	}
   },
 mounted() {
   this.getProducts();

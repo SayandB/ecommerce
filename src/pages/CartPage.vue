@@ -3,7 +3,7 @@
    <div class="page">
      <div class="col s12 m7">
        <h5>Shopping Cart</h5>
-       <div v-for="(carddetails, index) in displayCartDetails" v-bind:key = "index">
+       <!-- <div v-for="(carddetails, index) in displayCartDetails" v-bind:key = "index"> --> 
       <div class="card horizontal">
       <div class="card-image">
         <img :src="carddetails.imageUrl">
