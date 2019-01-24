@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <div>
- <search-bar></search-bar> 
+  <div class="main">
    <div class="page">
      <div class="col s12 m7">
        <h5>Shopping Cart</h5>
@@ -12,6 +10,7 @@
       </div>
       <div class="card-stacked">
         <div class="card-content">
+          console.log(carddetails);
           <p><strong>CART ID:{{carddetails.cartId}}</strong>></p>
           <p><strong>TOKEN:{{carddetails.token}}</strong>></p>
           <p><strong>PRODUCT ID:{{carddetails.productId}}</strong>></p>
@@ -24,15 +23,12 @@
         <div class="card-action">
           <!--  <button style="color:black;background-color:#f44336" type="submit" name="action" @click="removeproduct">Remove</button> -->
           <a href="#" class = "cart red-text" @click="removeproduct">Remove</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-   </div>
-
- </div>
-  </div>
-  </div>
-
   <div class="buton">
       <!-- <button style="color:white;background-color:black;size:70px"type="submit" name="action" @click="buying">BuyNow</button> -->
       <a href="#" class = "cart red-text" @click="buying">BuyNow</a>
@@ -52,7 +48,7 @@ export default {
     }
   },
   methods: {
-   ...mapActions([deleteProduct,buyProduct]),
+   ...mapActions(['deleteProduct','buyProduct']),
     removeproduct () {
       this.$store.dispatch('deleteProduct',{
         userId: this.isActiveUser.userId,

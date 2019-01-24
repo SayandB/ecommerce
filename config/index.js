@@ -24,7 +24,7 @@ module.exports = {
         changeOrigin: true
       },
       '/cart/**': {
-        target: 'http://172.16.20.84:9090',
+        target: 'http://10.177.7.180:9090',
         changeOrigin: true
       }
     },

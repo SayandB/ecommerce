@@ -99,7 +99,7 @@ import {mapGetters,mapActions} from 'vuex'
   }
 }
 </script>
-<style>
+<style scoped>
   :after,
   :before {
     box-sizing: border-box

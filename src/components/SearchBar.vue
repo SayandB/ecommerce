@@ -3,7 +3,7 @@
    <nav class="white">
             <div class="nav-wrapper">
               <a href="/MainPage" class="brand-logo red-text">
-                <img src = "https://i.pinimg.com/originals/0f/a9/5d/0fa95d88f90cc21e23f2d23a09dd016b.png" ></a>
+                <img src = "../assets/famazonwhite.jpg" ></a>
                 <ul class="hide-on-med-and-down right">               
                     <li>    
                         <div class="center row">
@@ -24,7 +24,7 @@
                         <a  class="red-text" v-else href="/Login">Login</a>
                     </li>
                     <li>
-                      <router-link class = "red-text" v-if ="isLogin" to="/Logout">Logout</router-link>
+                      <router-link class = "red-text" v-if ="isLogin" to="/MainPage">Logout</router-link>
                     </li>
                 </ul>
             </div>
@@ -33,7 +33,7 @@
   </main>
 </template>
 
-<style>
+<style scoped>
 
 i{
   cursor: pointer;
