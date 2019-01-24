@@ -19,6 +19,14 @@ module.exports = {
         target: 'http://10.177.7.128:8080',
         changeOrigin: true
       },
+      '/search/**': {
+        target: 'http://10.177.7.140:8080',
+        changeOrigin: true
+      },
+      '/cart/**': {
+        target: 'http://172.16.20.84:9090',
+        changeOrigin: true
+      }
     },
 
     // Various Dev Server settings

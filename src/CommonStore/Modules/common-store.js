@@ -3,21 +3,44 @@ import commonApi from '@/api'
 const state = {
   login : false,
   loginDetails : {},
-  product : {}
+  product : {},
+  addResponse: null,
+  orderResponse: null,
+  cartDetails: {},
+  products: [],
+  orderHistory: []
 }
 const mutations = {
+  ADDED_RESPONSE : (state,value) => {
+    state.addResponse = value
+  },
+  
+  ORDER_RESPONSE : (state,value) => {
+    state.orderResponse = value
+  },
+  
+  CART_DETAILS : (state, value) => {
+    state.cartDetails = value
+  },
   LOGIN_DETAILS : (state,value) => {
     state.loginDetails = value
-    // state.login = true
+    state.login = true
   },
 
   SIGNUP_DETAILS : (state,value) => {
     state.loginDetails = value
-    // state.login = true
+    state.login = true
   },
 
   SELECT_PRODUCT : (state, product) => {
     state.product = product
+  },
+  GET_PRODUCTS : (state, products) => {
+
+    state.products = products
+  },
+  GET_ORDER_HISTORY : (state, data) => {
+    state.orderHistory = data
   }
 }
 const actions = {
@@ -57,8 +80,65 @@ const actions = {
     )
   },
 
-  selectProduct ({commit},product) {
+  selectProduct ({commit}, product) {
     commit('SELECT_PRODUCT', product)
+  },
+  showProduct({commit}, data) {
+    debugger
+    commonApi.getDataViaApi(`/search/searchByName?querypara=${data}`,
+    (response) => {
+      debugger
+      commit('GET_PRODUCTS', response.body.productList)
+    },
+    (error) => {
+      console.log(error)
+      commit('GET_PRODUCTS',[])
+  })
+  },
+  deleteProduct ({commit},{userId, productId}){
+    commonApi.deleteDataViaApi(`/cart/removeProduct?userId=${userId}&productId=${productId}`,
+      (response) => {
+        commit('CART_DETAILS',response.body)
+      },
+      (error) => {
+        console.log(error)
+        commit('CART_DETAILS',[])
+      }
+    )
+  },
+
+  buyProduct ({commit},{userId}){
+    commonApi.deleteDataViaApi(`/cart/buy?token=${userId}`,
+      (response) => {
+        commit('ORDER_RESPONSE',response.body)
+      },
+      (error) => {
+        console.log(error)
+        commit('ORDER_RESPONSE',[])
+      }
+    )
+  },
+
+addingtocart ({commit},data) {
+    commonApi.postDataViaApi('/cart/addCart',data,
+      (response) => {
+        commit('ADDED_RESPONSE',response.body)
+      },
+      (error) => {
+        console.log(error)
+        commit('ADDED_RESPONSE',[])
+      }
+      )
+  },
+  orderHist ({commit}, data) {
+    commonApi.postDataViaApi('/user/getOrderHistory',data,
+    (response) => {
+      commit('GET_ORDER_HISTORY' ,response.body)
+    },
+    (error) => {
+      console.log(error)
+      commit('GET_ORDER_HISTORY', [])
+    })
   }
 }
 const getters = {
@@ -66,8 +146,8 @@ const getters = {
     return state.loginDetails
   },
 
-  signupdetails : (state) => {
-    return state.signupDetails
+  loginStatus : (state) => {
+    return state.login
   },
 
   getSelectedProduct: (state) => {
@@ -75,6 +155,15 @@ const getters = {
   },
   getLogin: (state) => {
     return state.login
+  },
+  showProduct: (state) => {
+    return state.products
+  },
+  getCartDetails : (state) => {
+    return state.cartdetails
+  },
+  getOrderHist : (state) => {
+    return state.orderHistory
   }
 }
 

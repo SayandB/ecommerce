@@ -6,33 +6,33 @@
       <div class="sign-in-htm">
         <div class="group">
           <label for="user" class="label">Username or Email</label>
-          <input id="user5" type="text" class="input">
+          <input id="user5" v-model = 'emailId' type="text" class="input">
         </div>
         <div class="group">
           <label for="pass" class="label">Password</label>
-          <input id="pass" type="password" class="input" data-type="password">
+          <input id="pass" v-model = 'password' type="password" class="input" data-type="password">
         </div>
-        <div class="group">
-          <input type="submit" class="button" value="Sign In" @click="loginUser">
+        <div class="group" >
+          <input type="submit" class="button" value="Sign In"  @click="loginUser">
         </div>
         <div class="hr"></div>
       </div>
       <div class="for-pwd-htm">
         <div class="group">
           <label for="user" class="label">Enter Your Name</label>
-          <input id="user1" type="text" class="input">
+          <input id="user1" type="text" v-model = 'name' class="input">
         </div>
         <div class="group">
           <label for="user" class="label">Enter Your Email</label>
-          <input id="user2" type="text" class="input">
+          <input id="user2" type="text" v-model = 'emailId' class="input">
         </div>
         <div class="group">
           <label for="user" class="label">Enter Your Password</label>
-          <input id="user33" type="text" class="input">
+          <input id="user33" type="password" v-model = 'password' class="input">
         </div>
         <div class="group">
           <label for="user" class="label">Confirm Your Password</label>
-          <input id="user3" type="text" class="input">
+          <input id="user3" type="password" v-model = 'confirmPassword' class="input">
         </div>
 
         <div class="group">
@@ -53,9 +53,10 @@ import {mapGetters,mapActions} from 'vuex'
   },
   data () {
     return {
-      name : 'ABC',
+      name : '',
       emailId : '',
-      password : ''
+      password : '',
+      confirmPassword : ''
     }
   },
    methods: {
@@ -65,7 +66,8 @@ import {mapGetters,mapActions} from 'vuex'
       data:{
         name : this.name,
         emailId : this.emailId,
-        password : this.password
+        password : this.password,
+        confirmpassword : this.confirmpassword
       },
       success: this.callOnSuccess,
       failure: this.callOnError
@@ -98,15 +100,6 @@ import {mapGetters,mapActions} from 'vuex'
 }
 </script>
 <style>
-  body {
-    margin: 0;
-    color: #edf3ff;
-    background: #c8c8c8;
-    background: url(https://hdqwalls.com/download/material-design-4k-2048x1152.jpg) fixed;
-    background-size: cover;
-    font: 600 16px/18px 'Open Sans', sans-serif;
-  }
-
   :after,
   :before {
     box-sizing: border-box
@@ -144,6 +137,11 @@ import {mapGetters,mapActions} from 'vuex'
     position: absolute;
     padding: 90px 70px 50px 70px;
     background: rgba(0, 0, 0, 0.5);
+    margin: 0;
+    color: #edf3ff;
+    background: url(https://hdqwalls.com/download/material-design-4k-2048x1152.jpg) fixed;
+    background-size: cover;
+    font: 600 16px/18px 'Open Sans', sans-serif;
   }
 
   .sign-in-htm {

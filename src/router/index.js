@@ -5,8 +5,10 @@ import MainPage from '@/pages/MainPage'
 import Login from '@/pages/Login'
 // import ProductDetails from '@/pages/ProductDetails'
 import DetailsPage from '@/pages/DetailsPage'
-// import CartPage from '@/pages/CartPage'
+import CartPage from '@/pages/CartPage'
 // import SamplePage from '@/pages/SamplePage'
+import OrderHistory from '@/pages/OrderHistory'
+import About from '@/pages/About'
 Vue.use(Router)
 export default new Router({
   mode: 'history',
@@ -17,7 +19,7 @@ export default new Router({
       component: MainPage
     },
     {
-      path: '/detailsPage',
+      path: '/detailspage',
       name: 'DetailsPage',
       component: DetailsPage
     },
@@ -25,6 +27,21 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/cartpage',
+      name: 'CartPage',
+      component: CartPage
+    },
+    {
+      path: '/orderhistory',
+      name: 'OrderHistory',
+      component: OrderHistory
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About
     }
   ]
 })
