@@ -191,6 +191,9 @@ const getters = {
   },
   getOrderHist : (state) => {
     return state.orderHistory
+  },
+  showProductDetails: (state) => {
+    return state.productDetails
   }
 }
 

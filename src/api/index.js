@@ -26,6 +26,13 @@ const commonApi = {
       errorHandler(error)
     })
   },
+  postDataViaApi2 (path, cb, errorHandler) {
+    Vue.http.post(path).then((res) => {
+      cb(res)
+    }, (error) => {
+      errorHandler(error)
+    })
+  },
   putDataViaApi (path, data, cb, errorHandler) {
     Vue.http.put(path, data).then((res) => {
       cb(res)
