@@ -12,19 +12,19 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/user/**': {
-        target: 'http://10.177.7.128:5555',
+        target: 'http://172.16.20.90:5555',
         changeOrigin: true
       },
       '/inventory/**': {
-        target: 'http://10.177.7.128:8080',
+        target: 'http://172.16.20.90:8080',
         changeOrigin: true
       },
       '/search/**': {
-        target: 'http://10.177.7.140:8080',
+        target: 'http://172.16.20.20:8080',
         changeOrigin: true
       },
       '/cart/**': {
-        target: 'http://10.177.7.180:9090',
+        target: 'http://172.16.20.40:9090',
         changeOrigin: true
       }
     },
