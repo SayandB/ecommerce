@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="card-action">
-          <a href="/CartPage">Add to Cart</a>
+          <router-link to="/CartPage">Add to Cart</router-link>
         </div>
       </div>
     </div>
