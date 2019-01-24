@@ -8,7 +8,8 @@ const state = {
   orderResponse: null,
   cartDetails: {},
   products: [],
-  orderHistory: []
+  orderHistory: [],
+  productDetails: []
 }
 const mutations = {
   ADDED_RESPONSE : (state,value) => {
@@ -41,6 +42,9 @@ const mutations = {
   },
   GET_ORDER_HISTORY : (state, data) => {
     state.orderHistory = data
+  },
+  GET_PRODUCT_DETAILS : (state,data) => {
+    state.productDetails = data
   }
 }
 const actions = {
@@ -83,16 +87,16 @@ const actions = {
   selectProduct ({commit}, product) {
     commit('SELECT_PRODUCT', product)
   },
-  showProduct({commit}, data) {
+  getProductDetails({commit}, data) {
     debugger
-    commonApi.getDataViaApi(`/search/searchByName?querypara=${data}`,
+    commonApi.postDataViaApi2(`/search/searchByName?querypara=${data}`,
     (response) => {
       debugger
-      commit('GET_PRODUCTS', response.body.productList)
+      commit('GET_PRODUCT_DETAILS', response.body)
     },
     (error) => {
       console.log(error)
-      commit('GET_PRODUCTS',[])
+      commit('GET_PRODUCT_DETAILS',[])
   })
   },
   deleteProduct ({commit},{userId, productId}){
@@ -150,6 +154,18 @@ addingtocart ({commit},data) {
         commit('CART_DETAILS',[])
       }
       )
+  },
+  showProduct({commit}, data) {
+    debugger
+    commonApi.getDataViaApi(`/search/searchByName?querypara=${data}`,
+    (response) => {
+      debugger
+      commit('GET_PRODUCTS', response.body.productList)
+    },
+    (error) => {
+      console.log(error)
+      commit('GET_PRODUCTS',[])
+  })
   }
 }
 const getters = {
