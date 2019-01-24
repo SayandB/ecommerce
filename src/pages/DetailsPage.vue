@@ -8,16 +8,19 @@
       </div>
       <div class="card-stacked">
         <div class="card-content">
-          <p id="Price"> Price &#8377;{{selectedProduct.price}}</p>
           <p id="Description"> {{selectedProduct.description}}</p>
+          <div class="card-for" v-for>
+            <p id="Merchant Name"> {{selectedProduct.merchantName}}</p>
+            <p id="Price"> Price &#8377;{{selectedProduct.price}}</p>
+            <div class="card-action">
+                <router-link to="/CartPage">Add to Cart</router-link>
+            </div>
+          </div>
           <div class="display-quantity">
               <button @click="decrease">-</button>
               <input type="number" name="number" placeholder="0" v-model="quantity">
               <button @click="increase">+</button> 
           </div>
-        </div>
-        <div class="card-action">
-          <a href="/CartPage">Add to Cart</a>
         </div>
       </div>
     </div>
@@ -92,9 +95,12 @@ import SearchBar from '@/components/SearchBar'
 </script>
 <style scoped>
 
+.card-action{
+
+
+}
 main {
-  margin-left: 100px;
-  margin-right: 100px;
+  
 }
 .header{
   margin-left: 100px;

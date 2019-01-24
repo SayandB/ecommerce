@@ -24,8 +24,8 @@
 </template>
 <style scoped>
 .main {
-  margin-left: 100px;
-  margin-right: 100px;
+  /*margin-left: 100px;
+  margin-right: 100px;*/
 }
 .Rating {
   padding-left: 100px;
